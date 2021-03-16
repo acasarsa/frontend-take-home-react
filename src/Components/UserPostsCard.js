@@ -1,13 +1,8 @@
 import { useState, useEffect } from 'react';
 import UserPosts from './UserPosts';
+import { Link } from 'react-router-dom';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import {
-	Container,
-	Heading,
-	Card,
-	Content,
-	Columns,
-} from 'react-bulma-components/';
+import { Heading, Card, Content, Columns } from 'react-bulma-components/';
 
 export default function UserPostsCard(props) {
 	const { username, userId } = props;
@@ -29,12 +24,14 @@ export default function UserPostsCard(props) {
 		<Columns.Column size={6} multiline={3}>
 			<Card>
 				<Card.Content>
-					<Heading size={5}>{username}'s Posts</Heading>
-					<div>
+					<Heading size={5}>
+						<Link to={`/users/${userId}`}>{username}'s Posts</Link>
+					</Heading>
+					<Content>
 						{sortedPosts.map(post => (
 							<UserPosts key={post.id} title={post.title} />
 						))}
-					</div>
+					</Content>
 				</Card.Content>
 			</Card>
 		</Columns.Column>

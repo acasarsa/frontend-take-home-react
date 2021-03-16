@@ -7,7 +7,6 @@ import { Container, Heading, Section, Columns } from 'react-bulma-components/';
 
 export default function IndexPage() {
 	const [users, setUsers] = useState([]);
-	console.log(users);
 
 	useEffect(() => {
 		fetchUsers();
@@ -32,7 +31,7 @@ export default function IndexPage() {
 				<Heading size={5} align='center'>
 					User Post Index
 				</Heading>
-				<Container flex>
+				<Container>
 					<Columns>
 						{sortedUsers.map(user => (
 							<UserPostsCard

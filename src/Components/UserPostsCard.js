@@ -28,7 +28,10 @@ export default function UserPostsCard(props) {
 						<Link
 							to={{
 								pathname: `/users/${userId}`,
-								state: { ...props },
+								state: {
+									posts: sortedPosts,
+									props: { ...props },
+								},
 							}}
 						>
 							{username}'s Posts

@@ -23,13 +23,15 @@ export default function UserPostsCard(props) {
 		fetchUserPosts();
 	}, []);
 
+	const sortedPosts = posts.sort((a, b) => a.title.localeCompare(b.title));
+
 	return (
 		<Columns.Column size={6} multiline={3}>
 			<Card>
 				<Card.Content>
 					<Heading size={5}>{username}'s Posts</Heading>
 					<div>
-						{posts.map(post => (
+						{sortedPosts.map(post => (
 							<UserPosts key={post.id} title={post.title} />
 						))}
 					</div>

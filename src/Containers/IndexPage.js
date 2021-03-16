@@ -3,13 +3,7 @@ import { useState, useEffect } from 'react';
 import UserPostsCard from '../Components/UserPostsCard';
 import NewUserForm from '../Components/NewUserForm';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import {
-	Container,
-	Heading,
-	Section,
-	Columns,
-	Box,
-} from 'react-bulma-components/';
+import { Container, Heading, Section, Columns } from 'react-bulma-components/';
 
 export default function IndexPage() {
 	const [users, setUsers] = useState([]);
@@ -25,6 +19,9 @@ export default function IndexPage() {
 			.then(json => setUsers(json));
 	};
 
+	const sortedUsers = users.sort((a, b) =>
+		a.username.localeCompare(b.username)
+	);
 	return (
 		<Section>
 			<Heading align='center'>Blog Home Page</Heading>
@@ -37,7 +34,7 @@ export default function IndexPage() {
 				</Heading>
 				<Container flex>
 					<Columns>
-						{users.map(user => (
+						{sortedUsers.map(user => (
 							<UserPostsCard
 								key={user.id}
 								userId={user.id}

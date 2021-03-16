@@ -25,7 +25,14 @@ export default function UserPostsCard(props) {
 			<Card>
 				<Card.Content>
 					<Heading size={5}>
-						<Link to={`/users/${userId}`}>{username}'s Posts</Link>
+						<Link
+							to={{
+								pathname: `/users/${userId}`,
+								state: { ...props },
+							}}
+						>
+							{username}'s Posts
+						</Link>
 					</Heading>
 					<Content>
 						{sortedPosts.map(post => (

@@ -1,4 +1,3 @@
-// import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import IndexPage from './Containers/IndexPage';
 import UserDetail from './Components/UserDetail';

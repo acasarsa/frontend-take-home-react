@@ -7,9 +7,6 @@ export const UsersProvider = props => {
 
 	useEffect(() => {
 		fetchUsers();
-		// return () => {
-		// 	setUsers([]);
-		// };
 	}, []);
 
 	const fetchUsers = () => {
@@ -18,7 +15,6 @@ export const UsersProvider = props => {
 			.then(json => setUsers(json));
 	};
 
-	// const users = unSortedUsers.sort((a, b) => a.username.localeCompare(b.username));
 	return (
 		<UsersContext.Provider value={[users, setUsers]}>
 			{props.children}

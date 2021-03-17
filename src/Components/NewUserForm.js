@@ -45,22 +45,22 @@ export default function NewUserForm({ createUser }) {
 						/>
 					</Control>
 				</Field>
-				<Field>
-					<Control>
-						<Button.Group>
-							<Button
-								type='primary'
-								onMouseDown={e => {
-									createUser(e, form.username, form.company, form.email);
-									setForm('');
-								}}
-							>
-								Submit
-							</Button>
-						</Button.Group>
-					</Control>
-				</Field>
 			</form>
+			<Field>
+				<Control>
+					<Button.Group>
+						<Button
+							type='submit'
+							onMouseDown={e => {
+								createUser(e, form.username, form.company, form.email);
+								setForm('');
+							}}
+						>
+							Submit
+						</Button>
+					</Button.Group>
+				</Control>
+			</Field>
 		</Box>
 	);
 }

@@ -16,7 +16,7 @@ export default function UserPostsCard(props) {
 
 	useEffect(() => {
 		fetchUserPosts();
-	}, []);
+	});
 
 	const sortedPosts = posts.sort((a, b) => a.title.localeCompare(b.title));
 

@@ -10,7 +10,7 @@ export default function IndexPage() {
 
 	useEffect(() => {
 		fetchUsers();
-	}, [users]);
+	}, [users, setUsers]);
 
 	const fetchUsers = () => {
 		fetch('https://jsonplaceholder.typicode.com/users')

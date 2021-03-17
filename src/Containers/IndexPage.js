@@ -1,27 +1,28 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UsersContext } from '../UsersContext';
 import UserPostsCard from '../Components/UserPostsCard';
 import NewUserForm from '../Components/NewUserForm';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Container, Heading, Section, Columns } from 'react-bulma-components/';
 
 export default function IndexPage() {
-	const [users, setUsers] = useState([]);
+	const [users, setUsers] = useContext(UsersContext);
 
-	useEffect(() => {
-		fetchUsers();
-		return () => {
-			setUsers([]);
-		};
-	}, []);
+	// useEffect(() => {
+	// 	// fetchUsers();
+	// 	return () => {
+	// 		setUsers([]);
+	// 	};
+	// }, []);
 
 	useEffect(() => {});
 
-	const fetchUsers = () => {
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then(resp => resp.json())
-			.then(json => setUsers(json));
-	};
+	// const fetchUsers = () => {
+	// 	fetch('https://jsonplaceholder.typicode.com/users')
+	// 		.then(resp => resp.json())
+	// 		.then(json => setUsers(json));
+	// };
 
 	const createUser = (e, username, email) => {
 		e.preventDefault();

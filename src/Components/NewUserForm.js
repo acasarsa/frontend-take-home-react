@@ -4,7 +4,7 @@ import { Form, Button, Box } from 'react-bulma-components/';
 export default function NewUserForm({ createUser }) {
 	const { Input, Field, Control, Label } = Form;
 
-	const [form, setForm] = useState({ username: '', company: '', email: '' });
+	const [form, setForm] = useState({ username: '', email: '' });
 	const update = ({ target }) => {
 		setForm({ ...form, [target.name]: target.value }, console.log(form));
 	};
@@ -23,17 +23,17 @@ export default function NewUserForm({ createUser }) {
 						/>
 					</Control>
 				</Field>
-				<Field>
+				{/* <Field>
 					<Control>
-						<Label>Company</Label>
+						<Label>Website</Label>
 						<Input
 							placeholder='Text input'
-							name='company'
-							value={form.company}
+							name='website'
+							value={form.website}
 							onChange={update}
 						/>
 					</Control>
-				</Field>
+				</Field> */}
 				<Field>
 					<Control>
 						<Label>Email</Label>
@@ -46,22 +46,25 @@ export default function NewUserForm({ createUser }) {
 					</Control>
 				</Field>
 			</form>
-			<Field>
-				<Control>
-					<Button.Group>
-						<Button
-							type='submit'
-							onMouseDown={e => {
-								createUser(e, form.username, form.company, form.email);
-								e.stopPropagation();
-								setForm('');
-							}}
-						>
-							Submit
-						</Button>
-					</Button.Group>
-				</Control>
-			</Field>
+			<div style={{ marginTop: '1em' }}>
+				<Field>
+					<Control>
+						<Button.Group>
+							<Button
+								color='primary'
+								type='submit'
+								onMouseDown={e => {
+									createUser(e, form.username, form.company, form.email);
+									e.stopPropagation();
+									setForm('');
+								}}
+							>
+								Submit
+							</Button>
+						</Button.Group>
+					</Control>
+				</Field>
+			</div>
 		</Box>
 	);
 }

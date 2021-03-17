@@ -9,12 +9,13 @@ export default function IndexPage() {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
-		let unmounted = false;
 		fetchUsers();
 		return () => {
-			unmounted = true;
+			setUsers([]);
 		};
-	}, [users]);
+	}, []);
+
+	useEffect(() => {});
 
 	const fetchUsers = () => {
 		fetch('https://jsonplaceholder.typicode.com/users')
@@ -22,23 +23,23 @@ export default function IndexPage() {
 			.then(json => setUsers(json));
 	};
 
-	const createUser = (e, username, company, email) => {
+	const createUser = (e, username, email) => {
 		e.preventDefault();
+		e.stopPropagation();
 		console.log('hit');
+		// const newUser = { username, email };
 
-		const newUser = { username, company, email };
-
-		console.log('newUser', newUser);
+		// setUsers([...users, newUser]);
 
 		fetch('https://jsonplaceholder.typicode.com/users', {
 			method: 'POST',
-			body: JSON.stringify(newUser),
+			body: JSON.stringify({ username, email }),
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
 			},
 		})
 			.then(resp => resp.json())
-			.then(newUser => setUsers([...users, newUser]));
+			.then(json => setUsers([...users, json]));
 	};
 
 	const sortedUsers = users.sort((a, b) =>

@@ -18,18 +18,20 @@ export default function IndexPage() {
 			.then(json => setUsers(json));
 	};
 
-	const createUser = userData => {
-		fetch('https://jsonplaceholder.typicode.com/users', {
+	const createUser = async (e, username, company, email) => {
+		console.log('hi');
+		e.preventDefault();
+		const newUser = { username, company, email };
+		console.log('newUser', username, company, email);
+		await fetch('https://jsonplaceholder.typicode.com/users', {
 			method: 'POST',
-			body: JSON.stringify({
-				userData,
-			}),
+			body: JSON.stringify(newUser),
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
 			},
 		})
 			.then(resp => resp.json())
-			.then(json => console.log(json));
+			.then(newUser => setUsers([...users, newUser]));
 	};
 
 	const sortedUsers = users.sort((a, b) =>

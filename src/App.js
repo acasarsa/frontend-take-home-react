@@ -4,9 +4,9 @@ import IndexPage from './Containers/IndexPage';
 import UserDetail from './Components/UserDetail';
 
 function App() {
-	let location = useLocation();
+	// let location = useLocation();
 
-	console.log('location', location.state);
+	// console.log('location', location.state);
 	return (
 		<div>
 			<Switch>

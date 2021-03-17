@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
+import { useLocation, matchPath } from 'react-router-dom';
 import { UsersContext } from '../UsersContext';
 import UserPostsCard from '../Components/UserPostsCard';
 import NewUserForm from '../Components/NewUserForm';
@@ -10,27 +11,13 @@ export default function IndexPage() {
 	const [users, setUsers] = useContext(UsersContext);
 
 	// useEffect(() => {
-	// 	// fetchUsers();
-	// 	return () => {
-	// 		setUsers([]);
-	// 	};
-	// }, []);
-
-	useEffect(() => {});
-
-	// const fetchUsers = () => {
-	// 	fetch('https://jsonplaceholder.typicode.com/users')
-	// 		.then(resp => resp.json())
-	// 		.then(json => setUsers(json));
-	// };
+	// 	console.log(location.pathname.includes('/users/'));
+	// });
 
 	const createUser = (e, username, email) => {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log('hit');
-		// const newUser = { username, email };
-
-		// setUsers([...users, newUser]);
+		// console.log('hit');
 
 		fetch('https://jsonplaceholder.typicode.com/users', {
 			method: 'POST',
@@ -46,33 +33,45 @@ export default function IndexPage() {
 	const sortedUsers = users.sort((a, b) =>
 		a.username.localeCompare(b.username)
 	);
-	return (
-		<Section>
-			<Heading align='center'>Blog Home Page</Heading>
-			<Container>
-				<NewUserForm createUser={createUser} />
-			</Container>
-			<Section>
-				<Heading size={5} align='center'>
-					User Post Index
-				</Heading>
-				<Container>
-					<Columns>
-						{sortedUsers.map(user => (
-							<UserPostsCard
-								key={user.id}
-								userId={user.id}
-								username={user.username}
-								email={user.email}
-								address={user.address}
-								phone={user.phone}
-								website={user.website}
-								company={user.company}
-							/>
-						))}
-					</Columns>
-				</Container>
-			</Section>
-		</Section>
-	);
+
+	const location = useLocation();
+	const detailPath = location.pathname.includes('/users/');
+
+	const renderIndex = () => {
+		if (detailPath) {
+			return null;
+		} else {
+			return (
+				<Section>
+					<Heading align='center'>Blog Home Page</Heading>
+					<Container>
+						<NewUserForm createUser={createUser} />
+					</Container>
+					<Section>
+						<Heading size={5} align='center'>
+							User Post Index
+						</Heading>
+						<Container>
+							<Columns>
+								{sortedUsers.map(user => (
+									<UserPostsCard
+										key={user.id}
+										userId={user.id}
+										username={user.username}
+										email={user.email}
+										address={user.address}
+										phone={user.phone}
+										website={user.website}
+										company={user.company}
+									/>
+								))}
+							</Columns>
+						</Container>
+					</Section>
+				</Section>
+			);
+		}
+	};
+
+	return renderIndex();
 }

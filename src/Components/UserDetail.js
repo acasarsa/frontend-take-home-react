@@ -1,7 +1,7 @@
 import React from 'react';
 import UserPosts from '../Components/UserPosts';
 import { Heading, Section, Box, Button } from 'react-bulma-components/';
-import { useHistory } from 'react-router-dom';
+import { useHistory, matchPath } from 'react-router-dom';
 
 export default function UserDetail(props) {
 	const {
@@ -12,6 +12,10 @@ export default function UserDetail(props) {
 		website,
 		company,
 	} = props.location.state.props;
+	console.log('props', props);
+	console.log('props', props.match.params.id);
+
+	const match = matchPath(props.match.url);
 
 	const sortedPosts = props.location.state.posts;
 

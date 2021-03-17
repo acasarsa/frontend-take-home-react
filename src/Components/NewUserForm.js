@@ -9,14 +9,6 @@ export default function NewUserForm({ createUser }) {
 		setForm({ ...form, [target.name]: target.value }, console.log(form));
 	};
 
-	// const [username, setUsername] = useState('');
-	// const [company, setCompany] = useState('');
-	// const [address, setAddress] = useState('');
-	// const [email, setEmail] = useState('');
-	// const [phone, setPhone] = useState('');
-	// const [website, setWebsite] = useState('');
-	// console.log('username', username);
-
 	return (
 		<Box>
 			<form>

@@ -19,10 +19,13 @@ export default function IndexPage() {
 	};
 
 	const createUser = async (e, username, company, email) => {
-		console.log('hi');
 		e.preventDefault();
+		console.log('hit');
+
 		const newUser = { username, company, email };
-		console.log('newUser', username, company, email);
+
+		console.log('newUser', newUser);
+
 		await fetch('https://jsonplaceholder.typicode.com/users', {
 			method: 'POST',
 			body: JSON.stringify(newUser),

@@ -9,8 +9,12 @@ export default function IndexPage() {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
+		let unmounted = false;
 		fetchUsers();
-	}, [users, setUsers]);
+		return () => {
+			unmounted = true;
+		};
+	}, [users]);
 
 	const fetchUsers = () => {
 		fetch('https://jsonplaceholder.typicode.com/users')
@@ -18,7 +22,7 @@ export default function IndexPage() {
 			.then(json => setUsers(json));
 	};
 
-	const createUser = async (e, username, company, email) => {
+	const createUser = (e, username, company, email) => {
 		e.preventDefault();
 		console.log('hit');
 
@@ -26,7 +30,7 @@ export default function IndexPage() {
 
 		console.log('newUser', newUser);
 
-		await fetch('https://jsonplaceholder.typicode.com/users', {
+		fetch('https://jsonplaceholder.typicode.com/users', {
 			method: 'POST',
 			body: JSON.stringify(newUser),
 			headers: {

@@ -53,6 +53,7 @@ export default function NewUserForm({ createUser }) {
 							type='submit'
 							onMouseDown={e => {
 								createUser(e, form.username, form.company, form.email);
+								e.stopPropagation();
 								setForm('');
 							}}
 						>

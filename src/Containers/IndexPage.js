@@ -10,12 +10,26 @@ export default function IndexPage() {
 
 	useEffect(() => {
 		fetchUsers();
-	}, []);
+	}, [users]);
 
 	const fetchUsers = () => {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(resp => resp.json())
 			.then(json => setUsers(json));
+	};
+
+	const createUser = userData => {
+		fetch('https://jsonplaceholder.typicode.com/users', {
+			method: 'POST',
+			body: JSON.stringify({
+				userData,
+			}),
+			headers: {
+				'Content-type': 'application/json; charset=UTF-8',
+			},
+		})
+			.then(resp => resp.json())
+			.then(json => console.log(json));
 	};
 
 	const sortedUsers = users.sort((a, b) =>
@@ -25,7 +39,7 @@ export default function IndexPage() {
 		<Section>
 			<Heading align='center'>Blog Home Page</Heading>
 			<Container>
-				<NewUserForm />
+				<NewUserForm createUser={createUser} />
 			</Container>
 			<Section>
 				<Heading size={5} align='center'>

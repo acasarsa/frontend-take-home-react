@@ -1,3 +1,3 @@
-export default function NewUserForm() {
+export default function NewUserForm({ createUser }) {
 	return <div></div>;
 }

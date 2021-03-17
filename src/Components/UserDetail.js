@@ -1,6 +1,6 @@
 import React from 'react';
 import UserPosts from '../Components/UserPosts';
-import { Container, Heading, Section, Box } from 'react-bulma-components/';
+import { Heading, Section, Box } from 'react-bulma-components/';
 
 export default function UserDetail(props) {
 	const {

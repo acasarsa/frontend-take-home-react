@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import UserPosts from './UserPosts';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, matchPath } from 'react-router-dom';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Heading, Card, Content, Columns } from 'react-bulma-components/';
 
@@ -16,9 +16,20 @@ export default function UserPostsCard(props) {
 
 	useEffect(() => {
 		fetchUserPosts();
-	}, []);
+	});
 
 	const sortedPosts = posts.sort((a, b) => a.title.localeCompare(b.title));
+
+	// const location = useLocation();
+	// // console.log(location.pathname);
+
+	// const match = matchPath(`/users/${userId}`, {
+	// 	path: '/users/:id',
+	// 	exact: true,
+	// 	strict: true,
+	// });
+
+	// match ? console.log('true') : console.log('false');
 
 	return (
 		<Columns.Column size={6} multiline={3}>
@@ -28,7 +39,10 @@ export default function UserPostsCard(props) {
 						<Link
 							to={{
 								pathname: `/users/${userId}`,
-								state: { ...props },
+								state: {
+									posts: sortedPosts,
+									props: { ...props },
+								},
 							}}
 						>
 							{username}'s Posts

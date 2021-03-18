@@ -1,6 +1,6 @@
 import React from 'react';
-import { useEffect, useContext, useState } from 'react';
-import { useLocation, matchPath } from 'react-router-dom';
+import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { UsersContext } from '../UsersContext';
 import UserPostsCard from '../Components/UserPostsCard';
 import NewUserForm from '../Components/NewUserForm';
@@ -10,10 +10,9 @@ import { Container, Heading, Section, Columns } from 'react-bulma-components/';
 export default function IndexPage() {
 	const [users, setUsers] = useContext(UsersContext);
 
-	const createUser = (e, username, email, errors) => {
+	const createUser = (e, username, email) => {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log(errors);
 
 		fetch('https://jsonplaceholder.typicode.com/users', {
 			method: 'POST',

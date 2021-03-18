@@ -6,7 +6,8 @@ export default function NewUserForm({ createUser }) {
 
 	const [form, setForm] = useState({ username: '', email: '' });
 	const update = ({ target }) => {
-		setForm({ ...form, [target.name]: target.value }, console.log(form));
+		const { name, value } = target;
+		setForm({ ...form, [name]: value }, console.log(form));
 	};
 
 	return (
@@ -23,17 +24,6 @@ export default function NewUserForm({ createUser }) {
 						/>
 					</Control>
 				</Field>
-				{/* <Field>
-					<Control>
-						<Label>Website</Label>
-						<Input
-							placeholder='Text input'
-							name='website'
-							value={form.website}
-							onChange={update}
-						/>
-					</Control>
-				</Field> */}
 				<Field>
 					<Control>
 						<Label>Email</Label>
@@ -54,7 +44,7 @@ export default function NewUserForm({ createUser }) {
 								color='primary'
 								type='submit'
 								onMouseDown={e => {
-									createUser(e, form.username, form.company, form.email);
+									createUser(e, form.username, form.email);
 									e.stopPropagation();
 									setForm('');
 								}}

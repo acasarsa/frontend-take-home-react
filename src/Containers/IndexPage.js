@@ -10,24 +10,23 @@ import { Container, Heading, Section, Columns } from 'react-bulma-components/';
 export default function IndexPage() {
 	const [users, setUsers] = useContext(UsersContext);
 
-	// useEffect(() => {
-	// 	console.log(location.pathname.includes('/users/'));
-	// });
-
-	const createUser = (e, username, email) => {
+	const createUser = (e, username, email, errors) => {
 		e.preventDefault();
 		e.stopPropagation();
-		// console.log('hit');
+		console.log(errors);
 
 		fetch('https://jsonplaceholder.typicode.com/users', {
 			method: 'POST',
-			body: JSON.stringify({ username, email }),
+			body: JSON.stringify({ username: username, email: email }),
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
 			},
 		})
 			.then(resp => resp.json())
-			.then(json => setUsers([...users, json]));
+			.then(json => {
+				setUsers([...users, json]);
+				console.log(json);
+			});
 	};
 
 	const sortedUsers = users.sort((a, b) =>

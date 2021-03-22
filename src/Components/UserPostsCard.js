@@ -8,15 +8,15 @@ export default function UserPostsCard(props) {
 	const { username, userId } = props;
 	const [posts, setPosts] = useState([]);
 
-	const fetchUserPosts = () => {
-		fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-			.then(resp => resp.json())
-			.then(json => setPosts(json));
-	};
-
 	useEffect(() => {
+		async function fetchUserPosts() {
+			fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+				.then(resp => resp.json())
+				.then(json => setPosts(json));
+		}
+
 		fetchUserPosts();
-	});
+	}, [userId]);
 
 	const sortedPosts = posts.sort((a, b) => a.title.localeCompare(b.title));
 

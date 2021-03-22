@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import UserPosts from './UserPosts';
-import { Link, useLocation, matchPath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Heading, Card, Content, Columns } from 'react-bulma-components/';
 
@@ -8,28 +8,20 @@ export default function UserPostsCard(props) {
 	const { username, userId } = props;
 	const [posts, setPosts] = useState([]);
 
-	const fetchUserPosts = () => {
-		fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-			.then(resp => resp.json())
-			.then(json => setPosts(json));
-	};
-
 	useEffect(() => {
+		async function fetchUserPosts() {
+			fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+				.then(resp => resp.json())
+				.then(json => setPosts(json));
+		}
+
 		fetchUserPosts();
-	});
+		return () => {
+			setPosts([]);
+		};
+	}, [userId]);
 
 	const sortedPosts = posts.sort((a, b) => a.title.localeCompare(b.title));
-
-	// const location = useLocation();
-	// // console.log(location.pathname);
-
-	// const match = matchPath(`/users/${userId}`, {
-	// 	path: '/users/:id',
-	// 	exact: true,
-	// 	strict: true,
-	// });
-
-	// match ? console.log('true') : console.log('false');
 
 	return (
 		<Columns.Column size={6} multiline={3}>

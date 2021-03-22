@@ -7,13 +7,16 @@ export const UsersProvider = props => {
 
 	useEffect(() => {
 		fetchUsers();
+		return () => {
+			setUsers([]);
+		};
 	}, []);
 
-	const fetchUsers = () => {
+	function fetchUsers() {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(resp => resp.json())
 			.then(json => setUsers(json));
-	};
+	}
 
 	return (
 		<UsersContext.Provider value={[users, setUsers]}>
